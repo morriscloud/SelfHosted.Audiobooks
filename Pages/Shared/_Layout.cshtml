@@ -1,51 +1,158 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor accessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SelfHosted.Audiobooks</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SelfHosted.Audiobooks.styles.css" asp-append-version="true" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Self-Hosted // Audiobooks</title>
+    <link rel="stylesheet" href="~/css/output.css" asp-append-version="true"/>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">SelfHosted.Audiobooks</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+<body class="h-full page-background dark:dark-page-background">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - SelfHosted.Audiobooks - <a asp-area="" asp-page="/Privacy">Privacy</a>
+<nav id="header" class="fixed w-full z-10 top-0 bg-gray-800 nav-background">
+
+    <div id="progress" class="h-1 z-20 top-0" style="background:linear-gradient(to right, #4dc0b5 var(--scroll), transparent 0);"></div>
+
+    <div class="w-full max-w-7xl mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
+
+        <div class="pl-4">
+            <a class="text-white text-base no-underline hover:no-underline font-extrabold text-xl" href="/">
+                Self-Hosted // Audiobooks
+            </a>
         </div>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <div class="block lg:hidden pr-4">
+            <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-300 border-rose-900 hover:bg-rose-600 hover:border-rose-900 appearance-none focus:outline-none">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                </svg>
+            </button>
+        </div>
 
-    @await RenderSectionAsync("Scripts", required: false)
+        <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-100 dark:bg-gray-900 md:bg-transparent z-20" id="nav-content">
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                <li class="mr-3">
+                    @if (accessor.HttpContext?.Request.Path.Value == "/")
+                    {
+                        <a class="text-white bg-rose-600 block px-3 py-2 rounded-md text-base font-medium" asp-area="" asp-page="Index">
+                            Dashboard
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="text-gray-300 hover:bg-rose-600 hover:text-white focus:ring-2 focus:ring-rose-900 block px-3 py-2 rounded-md text-base font-medium" asp-area="" asp-page="Index">
+                            Dashboard
+                        </a>
+                    }
+                </li>
+                <li class="mr-3">
+                    @if (accessor.HttpContext?.Request.Path.Value == "/Authors")
+                    {
+                        <a class="text-white bg-rose-600 block px-3 py-2 rounded-md text-base font-medium" asp-area="" asp-page="Authors">
+                            Authors
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="text-gray-300 hover:bg-rose-600 hover:text-white focus:ring-2 focus:ring-rose-900 block px-3 py-2 rounded-md text-base font-medium" asp-area="" asp-page="Authors">
+                            Authors
+                        </a>
+                    }
+                </li>
+                <li class="mr-3">
+                    @if (accessor.HttpContext?.Request.Path.Value == "/Books")
+                    {
+                        <a class="text-white bg-rose-600 block px-3 py-2 rounded-md text-base font-medium" asp-area="" asp-page="Books">
+                            Books
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="text-gray-300 hover:bg-rose-600 hover:text-white focus:ring-2 focus:ring-rose-900 block px-3 py-2 rounded-md text-base font-medium" asp-area="" asp-page="Books">
+                            Books
+                        </a>
+                    }
+                </li>
+                <li class="mr-3">
+                    @if (accessor.HttpContext?.Request.Path.Value == "/Series")
+                    {
+                        <a class="text-white bg-rose-600 block px-3 py-2 rounded-md text-base font-medium" asp-area="" asp-page="Series">
+                            Series
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="text-gray-300 hover:bg-rose-600 hover:text-white focus:ring-2 focus:ring-rose-900 block px-3 py-2 rounded-md text-base font-medium" asp-area="" asp-page="Series">
+                            Series
+                        </a>
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="flex-grow mt-20">
+    <div class="w-full h-full max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 bg-white bg-opacity-60 my-3 dark:bg-black dark:bg-opacity-60 dark:text-gray-200 shadow-lg">
+        @RenderBody()
+    </div>
+</main>
+
+<footer class="dark:bg-black dark:bg-opacity-25 bg-white bg-opacity-25 shadow fixed bottom-0 w-full max-w-full mx-auto">
+    <div class="max-w-7xl mx-auto my-3 px-4 sm:px-6 lg:px-8 dark:text-white">
+        Made with <span class="text-red-600">&hearts;</span> by <a href="https://blog.morriscloud.com" target="_blank" class="underline font-semibold">Tony Morris</a>
+    </div>
+</footer>
+
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("Scripts", required: false)
+
+<script>
+      /* Progress bar */
+      //Source: https://alligator.io/js/progress-bar-javascript-css-variables/
+      var h = document.documentElement,
+         b = document.body,
+         st = 'scrollTop',
+         sh = 'scrollHeight',
+         progress = document.querySelector('#progress'),
+         scroll;
+      var scrollpos = window.scrollY;
+      var header = document.getElementById("header");
+      var navcontent = document.getElementById("nav-content");
+
+      document.addEventListener('scroll', function() {
+
+         /*Refresh scroll % width*/
+         scroll = (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
+         progress.style.setProperty('--scroll', scroll + '%');
+
+         /*Apply classes for slide in bar*/
+         scrollpos = window.scrollY;
+
+         if (scrollpos > 10) {
+            header.classList.add("bg-white");
+            header.classList.add("shadow");
+            navcontent.classList.remove("bg-gray-100");
+            navcontent.classList.add("bg-white");
+         } else {
+            header.classList.remove("bg-white");
+            header.classList.remove("shadow");
+            navcontent.classList.remove("bg-white");
+            navcontent.classList.add("bg-gray-100");
+
+         }
+
+      });
+
+
+      //Javascript to toggle the menu
+      document.getElementById('nav-toggle').onclick = function() {
+         document.getElementById("nav-content").classList.toggle("hidden");
+      }
+   </script>
+
 </body>
 </html>
