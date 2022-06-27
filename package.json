@@ -1,0 +1,26 @@
+{
+  "name": "selfhosted.audiobooks",
+  "version": "1.0.0",
+  "description": "A simple web application to manage your audiobooks",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "css:build": "npx tailwind build -i ./wwwroot/css/site.css -o ./wwwroot/css/output.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morriscloud/SelfHosted.Audiobooks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/morriscloud/SelfHosted.Audiobooks/issues"
+  },
+  "homepage": "https://github.com/morriscloud/SelfHosted.Audiobooks#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.1.4"
+  }
+}
