@@ -16,6 +16,10 @@
     <Folder Include="wwwroot\js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="shortid" Version="4.0.0" />
+  </ItemGroup>
+
   <Target Name="Tailwind" BeforeTargets="Build">
     <Exec Command="npm run css:build" />
   </Target>
